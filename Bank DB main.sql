@@ -1,6 +1,6 @@
 --DROP DATABASE  IF EXISTS SQLTest2020 
---create database SQLTest2020
---use SQLTest2020
+--create database Bank2021
+use Bank2021DB
 
 
 
