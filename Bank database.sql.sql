@@ -1,6 +1,6 @@
 --DROP DATABASE  IF EXISTS SQLTest2020 
-create database SQLTest2020
---use SQLTest2020
+--create database Bank2022DB
+use Bank2022DB
 
 
 
@@ -101,11 +101,7 @@ INSERT INTO LOAN VALUES('L000033796',2, 'C001220001', 145100.00, 5.75,'2017-4-20
 
 
 
---STUDENT NUMBER: C3313933
---NAME: Pannha Oudom Munint
---LAB: Friday, 04:00-06:00
---Date: 16/10/2020
---SQL TEST
+--Query to push to TST and QA
 
 --For analyzing
 select * from BRANCH
@@ -113,38 +109,32 @@ select * From ACCOUNT
 select * from CUSTOMER
 Select * from LOAN
 
--- Question 1:
 --Print branch name and show account number.
 
 select Branch.branchName, ACCOUNT.branchNo, ACCOUNT.accNo from BRANCH, ACCOUNT
 group by branchName, accNo, account.branchNo
 order by COUNT(accNo)
 
---Question 1:
 --Print branch name and number of account in the branch.
 --Sorry if i misunderstood the question and sorry for any inconviniences.
 
 select Branch.branchName, ACCOUNT.accNo, count(accNo) as 'NumberOfAccInBranch' from ACCOUNT, BRANCH
 group by branchName, accNo 
 
--- Question 2:
 --Print customer number and name that has loan in the same bank as "Mary Chang" excluding "Mary Chang"
 
 select Customer.custNo, CUSTOMER.custName, BRANCH.branchNo from CUSTOMER, BRANCH where branchNo = '2' and custNo <> 'C938874002'
 group by custNo, custName, branchNo
 
--- Question 3:
 -- Print Loan number and name of customer who have paid their loans.
 
 select loanNO, CUSTOMER.custName from LOAN, CUSTOMER where datePaidoff is not null
 
--- Question 4:
 --If datePaidOff specidifed, print Loan number and customer number, name in descending order.
 
 select loanNO, Customer.custNo, CUSTOMER.custName, datePaidoff from LOAN, CUSTOMER where datePaidoff is not null
 order by (custName) DESC;
 
---Question 5:
 --Calculate and print Bank's average account balance
 
 Select AVG(balance) as 'Banks average balance'
