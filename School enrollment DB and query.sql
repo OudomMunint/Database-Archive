@@ -1,11 +1,9 @@
---Pannha Oudom Munint
---C3313933
---LAB: Friday 04:00PM - 06:00PM
+--DEV: Pannha Oudom Munint, L2, Jr SWE
 --DROP DATABASE IF EXISTS SCSRM
---go
 --Create DATABASE SCSRM
---go
---Use master
+--Create DATABASE master
+--TST use SCSRM, UDT and QA use master
+--Use master 
 --Use SCSRM
 
 
@@ -28,8 +26,8 @@ DROP TABLE Staff
 DROP TABLE Student
 DROP TABLE Member
 go
---Assignment 3 Script
 
+--DB table Script
 --Member Table
 CREATE TABLE Member (
     MemberID            VARCHAR(20) NOT NULL,                                       
@@ -185,9 +183,9 @@ CREATE TABLE CoursePrivileges (
              ON UPDATE CASCADE ON DELETE NO ACTION
  );
 
-go	
-	--Data Input
-	
+go
+
+--Data Input	
 --Member Table
 --Contect details is email instead of Phone numner
 INSERT INTO Member VALUES 
@@ -308,32 +306,35 @@ SELECT * FROM Enroll
 go
 --System Queries
 
-go
---Q1 Print Student name who have enrolled and courses they enrolled in
+--Print Student name who have enrolled and courses they enrolled in
 SELECT MemName As 'Member Name',CourseCode As 'Course Enrolled' 
 FROM Member
 where not MemName = 'Michael B' and not MemName = 'Tony F' and not MemName = 'Chael S';
 go
---Q2 Print Max amount of headphones allowed, member name and his or her code
+
+--Print Max amount of headphones allowed, member name and his or her code
 SELECT MaxAmount As 'Max Number of speakers allowed', MemName As 'Member Name', CourseCode As 'Course'
 FROM Privilege, Member
 GROUP BY MemName, CourseCode, MaxAmount
 ORDER BY 'Max Number of speakers allowed';
 go
---Q3 Show staff member ID  and the total number of reservations and acquisition they have made.
+
+--Show staff member ID  and the total number of reservations and acquisition they have made.
 SELECT COUNT(AcquisitionID)as 'Amount of acquisition and reservation', member.MemberID, Member.ContactDetail
 FROM Acquisition, Member
 Where NOT member.MemberID = 'M001' and not Member.MemberID = 'M003' and not Member.MemberID ='M005' and not Member.MemberID ='M010'
 GROUP BY member.MemberID, member.ContactDetail
 ORDER BY COUNT(AcquisitionID);
 go
---Q4 Print the name of student who borrowed a camera and the year they did
+
+--Print the name of student who borrowed a camera and the year they did
 SELECT MemName As 'Member name', MemberID, CategoryName As 'Category', Model, CURRENT_TIMESTAMP as 'Date time borrowed this year'
 from Member, Category, Moveable, AllResource
 where CategoryName ='Cameras' and AllResource.Model ='MSM908' and not MemberID = 'MS011' and not MemberID = 'MS014' and not MemberID = 'MS012'
 Group by MemberID,MemName, CategoryName, Model;
 go
---Q5 Show Most Loaned Movaeble resource This month
+
+--Show Most Loaned Movaeble resource This month (Business critical DO NOT PUSH TO DEV OR PROD)
 SELECT TOP(1) With ties Count(*) As 'Time Loaned this month', loan.MoModel As 'Laoned Resource Model', AllResource.ReName As 'Resource Name'
 FROM Loan, AllResource
 WHERE Loan.MoModel = AllResource.Model and MONTH(Loan.DueDate) = MONTH( SYSDATETIME())
@@ -346,7 +347,8 @@ and YEAR (Loan.DueDate) = YEAR(SYSDATETIME())
 group by ResourceID)
 Order by MoModel DESC
 go
---Q6 Print the date, Room, and number of reservations made for the rooms
+
+--Print the date, Room, and number of reservations made for the rooms
 SELECT CONVERT(DATE, Reservation.ReservationDateTime) as 'Reservation date', AllResource.ReName as 'Room', COUNT(*) as 'Number of Reservation made'
 FROM Reservation, ResourceLocation, AllResource
 WHERE ReName =  'Media Suite' AND CONVERT(DATE, ReservationDateTime) IN ('2020-05-01', '2020-06-05', '2020-09-19')
