@@ -1,11 +1,11 @@
-DROP DATABASE  IF EXISTS SQLTest2020 
-create database SQLTest2020
-use SQLTest2020
+--DROP DATABASE  IF EXISTS SQLTest2020 
+--create database Bank2021AccMgmt
+use Bank2021AccMgmt
 
 
 
 
---  BANK DATABASE SCRIPT
+-- BANK DATABASE SCRIPT
 
 -- CUSTOMER TABLE
 CREATE TABLE CUSTOMER(
@@ -98,8 +98,9 @@ INSERT INTO LOAN VALUES('L000033685',2, 'C231433009', 12000.00, 6.58,'2018-4-20'
 INSERT INTO LOAN VALUES('L000033796',2, 'C001220001', 145100.00, 5.75,'2017-4-20','2020-4-19','2020-4-19')
 
 
+-- If LOAN > 150K get customer then increase intrest rate by 1%
 select * from LOAN
-Where amount >= 1500000.00;
+Where amount >= 150000.00;
 
 Select custNo,
 amount*intRate As TotalLoan
