@@ -1,10 +1,13 @@
+--Query for hotel DB
+--TST AND QA ONLY
+
 select * from hotel
 --where city = 'Newcastle'
 where city like '%New%'
 
---select g from guest
---where guestAdress like '%Street%'
---order by guestName
+select g from guest
+where guestAdress like '%Street%'
+order by guestName
 
 select * from Room
 where (type like '%D' or type like'%F') and price >180
