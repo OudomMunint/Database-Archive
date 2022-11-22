@@ -1,3 +1,8 @@
+--Dev: Pannha Oudom Munint, L2, Jr SWE
+--Push to QA and TST not PROD
+--From DEV
+--External query for Student DB
+
 Select * from Register
 Select * from Student
 Select * from Semester
