@@ -1,5 +1,6 @@
 --DROP DATABASE IF EXISTS SCSRM
 --Create DATABASE SCSRM
+--College resource management, non confidential
 use SCSRM
 
 Drop TABLE Member
