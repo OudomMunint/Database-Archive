@@ -19,10 +19,7 @@ Drop TABLE Reservation
 Drop TABLE Admin
 Drop TABLE Acquisition
 
-
-
-
-
+--DB main
 CREATE TABLE Member (
     MemberID         VARCHAR(20) NOT NULL,
     Name             VARCHAR(20) NOT NULL,
